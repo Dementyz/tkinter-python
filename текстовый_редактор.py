@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import filedialog, messagebox
 
 
-def _open():
+def open():
     filename = filedialog.askopenfilename(
         title="Открыть файл",
         filetypes=[("Текстовые файлы", "*.txt"), ("Все файлы", "*.*")]
@@ -10,20 +10,17 @@ def _open():
     if not filename:
         return
 
-    try:
-        with open(filename, "r", encoding="utf-8") as file:
-            content = file.read()
-    except OSError as error:
-        messagebox.showerror("Ошибка", f"Не удалось открыть файл:\n{error}")
-        return
 
-    # Старый текст удаляется, чтобы новый не дописывался к нему.
+    with open(filename, "r", encoding="utf-8") as file:
+        content = file.read()
+    
+
     txt.delete("1.0", END)
     txt.insert(END, content)
     root.title(f"Текстовый редактор — {filename}")
 
 
-def _save():
+def save():
     filename = filedialog.asksaveasfilename(
         title="Сохранить файл",
         defaultextension=".txt",
@@ -32,12 +29,9 @@ def _save():
     if not filename:
         return False
 
-    try:
-        with open(filename, "w", encoding="utf-8") as file:
-            file.write(txt.get("1.0", END))
-    except OSError as error:
-        messagebox.showerror("Ошибка", f"Не удалось сохранить файл:\n{error}")
-        return False
+    
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(txt.get("1.0", END))
 
     root.title(f"Текстовый редактор — {filename}")
     return True
@@ -46,8 +40,8 @@ def _save():
 def close_win():
     save = messagebox.askyesno("Выход", "Сохранить текст перед выходом?")
     if save:
-        # Если пользователь отменил сохранение, программа остается открытой.
-        if _save():
+        
+        if save():
             root.destroy()
     else:
         root.destroy()
