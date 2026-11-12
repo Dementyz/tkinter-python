@@ -2,14 +2,11 @@ from tkinter import *
 
 
 def change_size(event):
-    try:
         width = int(width_entry.get())
         height = int(height_entry.get())
         if width <= 0 or height <= 0:
-            raise ValueError
-    except ValueError:
-        message.configure(text="Введите положительные целые числа")
-        return
+            print("неправильно введены значения")
+            return
 
     frame.configure(width=width, height=height)
     message.configure(text=f"Размер рамки: {width} x {height}")
