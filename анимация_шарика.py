@@ -48,7 +48,6 @@ buttons.pack(pady=10)
 Button(buttons, text="Старт", width=10, command=start).pack(side=LEFT, padx=5)
 Button(buttons, text="Стоп", width=10, command=stop).pack(side=LEFT, padx=5)
 
-# after позволяет двигать фигуру, не блокируя работу главного окна.
 start()
 root.protocol("WM_DELETE_WINDOW", close)
 root.mainloop()
