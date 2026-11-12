@@ -2,7 +2,7 @@ from tkinter import *
 
 
 def color(event):
-    # Изменятся сразу оба объекта с тегом group1.
+    
     canvas.itemconfig("group1", fill="red", width=3)
 
 
